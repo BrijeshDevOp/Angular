@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="js/angular-1.6.9.1.js"></script>
+    <script src="js/app.js"></script>
+    <style>
+        .ng-invalid.ng-dirty {
+            border-color: red;
+        }
+
+        .ng-valid.ng-dirty {
+            border-color: green;
+        }
+
+        input {
+            border: 2px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-init="name='chandan'; arr=[1,3]">
+        {{"The name is "+name}}
+        <p>{{arr[3]}}</p>
+        <p><span ng-bind="arr[0]"></span></p>
+        <p ng-repeat="number in arr">{{"number is "+number}}</p>
+
+        <div ng-controller="myController">
+            <p ng-hide="isSpy">{{name}}</p>
+            <p ng-hide="isSpy">{{age}}</p>
+            <p>{{fullname()}}</p>
+            <p ng-show="isSpy">{{codename}}</p>
+        </div>
+        <hr>
+        <div ng-controller="myData">
+
+        </div>
+
+        <div ng-controller="event">
+            <div ng-show="view">{{number}}</div>
+            <div>
+                <button type="button" ng-click="number=number+1;toggle();">Click</button>
+            </div>
+        </div>
+        <hr>
+        <div ng-controller="myData">
+            <form name="myForm" ng-submit=" myForm.$valid && submit()" novalidate>
+                <label for="desc">Name:</label>
+                <input type="text" ng-model="form.name" required>
+                <br><br>
+                <label for="desc">Age:</label>
+                <input type="text" ng-model="form.age" required>
+                <br><br>
+                <label for="desc">Salary</label>
+                <input type="text" ng-model="form.salary" required>
+                <br><br>
+                <label for="email">Email</label>
+                <input type="email" ng-model="form.email" required>
+                <br><br>
+                <button type="submit">Submit</button>
+            </form>
+            <div>
+                <span>{{form.name}}</span>||
+                <span>{{form.age}}</span>||
+                <span>{{form.salary}}</span>||
+                <span>{{form.email}}</span>||
+            </div>
+
+            <div ng-repeat="obj in data | orderBy:'-age'| limitTo:10">
+                <p>{{obj.name | uppercase | limitTo:3}}</p>
+                <p>{{obj.age }}</p>
+                <p>{{obj.salary | currency}}</p>
+                <p>{{obj.email}}</p>
+                <hr>
+            </div>
+        </div>
+
+        <div>
+            <myTag></myTag>
+        </div>
+    </div>
+</body>
+</html>
